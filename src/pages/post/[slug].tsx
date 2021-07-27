@@ -11,6 +11,7 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import { useUtterances } from '../../hooks/useUtterances';
 
 interface Post {
   first_publication_date: string | null;
@@ -35,6 +36,7 @@ interface PostProps {
 
 export default function Post({ post }: PostProps): JSX.Element {
   const router = useRouter();
+  useUtterances('comments');
 
   if (router.isFallback) {
     return <div>Carregando...</div>;
@@ -93,6 +95,7 @@ export default function Post({ post }: PostProps): JSX.Element {
             </section>
           ))}
         </article>
+        <div id="comments" />
       </main>
     </>
   );
